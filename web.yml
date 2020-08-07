@@ -9,11 +9,6 @@
         state: present
         update_cache: true
 
-    - name: Copy custom index.html
-      copy:
-        src: index.html
-        dest: /var/www/html/index.html
-
       notify:
         - start nginx
 
