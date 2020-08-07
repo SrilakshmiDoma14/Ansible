@@ -1,0 +1,24 @@
+---
+- name: Setup nginx
+  hosts: a
+  become: yes
+  tasks:
+    - name: Install Nginx on Ansible-node
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Copy custom index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+
+      notify:
+        - start nginx
+
+  handlers:
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
