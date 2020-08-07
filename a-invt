@@ -1,1 +1,1 @@
-a ansible_host=172.31.28.138 ansible_user=ubuntu ansible_ssh_private_key_file=./akey.pem
+a ansible_host=172.31.17.253 ansible_user=ubuntu ansible_ssh_private_key_file=./akey.pem
