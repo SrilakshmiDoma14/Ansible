@@ -1,6 +1,6 @@
 ---
 - name: Setup nginx
-  hosts: a
+  hosts: all
   become: yes
   tasks:
     - name: Install Nginx on Ansible-node
