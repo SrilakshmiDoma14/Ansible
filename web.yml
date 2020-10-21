@@ -1,19 +1,36 @@
 ---
-- name: Setup nginx
-  hosts: all
+- name: Setup Websrv 
+  hosts: websrvgrp
   become: yes
   tasks:
-    - name: Install Nginx on Ansible-node
-      apt:
-        name: nginx
+    - name: Install httpd on centos
+      yum:
+        name: httpd
         state: present
-        update_cache: true
 
-      notify:
-        - start nginx
-
-  handlers:
-    - name: start nginx
+    - name: Start & Enable httpd on centos
       service:
-        name: nginx
+        name: httpd
         state: started
+        enabled: yes
+
+    - name: Push index.html to dest
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+
+- name: Setup dbsrv
+  hosts: dbsrvgrp
+  become: yes
+  tasks:
+    - name: Install mariadb on centos
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: Start & Enable httpd on centos
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
